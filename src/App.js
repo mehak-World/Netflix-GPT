@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import Body from "./components/Body";
+import appStore from "./utils/appStore";
+import {Provider} from "react-redux";
 
 const App = () => {
   return (
-    <div className = "p-3 m-10">
-      <h1 className = "text-2xl text-blue-700">This is create react app</h1>
-    </div>
-  )
-}
+    <Provider store={appStore}>
+      <Body />
+    </Provider>
+  );
+};
 
-export default App
+export default App;
