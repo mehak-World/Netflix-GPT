@@ -11,11 +11,12 @@ const SecondaryContainer = () => {
   const popularMovies = useSelector((store) => store.movies.popularMovies)
   
   return (
-    <div>
+    <div className = "w-screen">
      
         <MovieList movies= {nowPlayingMovies} title = "Now Playing" />
 
         <MovieList movies= {popularMovies} title = "Popular" />
+        <MovieList movies= {nowPlayingMovies} title = "Top Rated" />
   
       
     </div>
