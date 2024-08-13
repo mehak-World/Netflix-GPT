@@ -9,3 +9,13 @@ export const BG_URL =
   export const API_KEY = "b591968fd1a4e9292632eab6104c5607"
 
   export const TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNTkxOTY4ZmQxYTRlOTI5MjYzMmVhYjYxMDRjNTYwNyIsIm5iZiI6MTcyMzQwODg5MC40ODIyMDYsInN1YiI6IjY2YjkyMTU0N2RmMDM0YjljNDFhMjk5MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.m6k8Ed2FsilXW5-NY-UsXVc_-CsYcIurK7x4u1g7RQY";
+
+  export const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNTkxOTY4ZmQxYTRlOTI5MjYzMmVhYjYxMDRjNTYwNyIsIm5iZiI6MTcyMzU2MTk4Ny4yNDUxODIsInN1YiI6IjY2YjkyMTU0N2RmMDM0YjljNDFhMjk5MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pLk8jCyiGhjUmQcXwf3ACRpwxKcfEdgJQzoUv-ka5Kc'
+    }
+  };
+
+  export const IMG_CDN = "https://image.tmdb.org/t/p/w500/"

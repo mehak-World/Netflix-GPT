@@ -62,7 +62,7 @@ const Login = () => {
             }
           })
           .catch((error) => {
-            console.log("Error during sign-up:", error);
+            
           });
       } else {
         signInWithEmailAndPassword(auth, email.current.value, password.current.value)
@@ -73,7 +73,7 @@ const Login = () => {
             navigate("/browse");
           })
           .catch((error) => {
-            console.log("Error during sign-in:", error);
+          
           });
       }
     }

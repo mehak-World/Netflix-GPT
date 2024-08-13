@@ -16,11 +16,11 @@ const Header = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log("Header component: ", user); // Check if photoURL is present here
+     
       if (user) {
         // User is signed in
         const { uid, email, displayName, photoURL } = user;
-        console.log("Photo URL", photoURL)
+        
         dispatch(addUser({ uid, email, displayName, photoURL }));
         navigate("/browse");
       } else {
@@ -36,10 +36,8 @@ const Header = () => {
 
   const handleSignout = () =>{
     signOut(auth).then(() => {
-      console.log("sign out successfull")
       navigate("/");
     }).catch((error) => {
-      console.log("error");
       setMsg(error);
     });  
   }
@@ -47,7 +45,7 @@ const Header = () => {
   return (
     <>
     
-     <div className = "absolute z-20 w-screen bg-black bg-opacity-55 flex justify-between align-middle">
+     <div className = " absolute z-20 w-screen bg-black bg-opacity-55 flex justify-between align-middle">
       <img className = "w-48 " src = "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png" />
      {user ? 
      (<div className = "flex gap-3 justify-center">
