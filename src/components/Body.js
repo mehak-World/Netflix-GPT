@@ -8,6 +8,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
+import Video from './Video';
 
 const Body = () => {
     const dispatch = useDispatch();
@@ -16,10 +17,13 @@ const Body = () => {
             path: "/",
             element: <Login />
         },
-
         {
             path: "/browse",
             element: <Browse />
+        },
+        {
+          path: "/movie/:id",
+          element: <Video />
         }
     ])
 

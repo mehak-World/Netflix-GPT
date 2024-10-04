@@ -7,7 +7,6 @@ import { useNowPlayingMovies } from '../hooks/useNowPlayingMovies';
 
 const MainContainer = () => {
     useMainMovie();
-    useNowPlayingMovies();
 
     const mainMovie = useSelector((store) => store.movies.mainMovie);
     const movies = useSelector((store) => store.movies.nowPlayingMovies);

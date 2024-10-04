@@ -12,13 +12,9 @@ const SecondaryContainer = () => {
   
   return (
     <div className = "w-screen">
-     
         <MovieList movies= {nowPlayingMovies} title = "Now Playing" />
-
         <MovieList movies= {popularMovies} title = "Popular" />
         <MovieList movies= {nowPlayingMovies} title = "Top Rated" />
-  
-      
     </div>
   )
 }

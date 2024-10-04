@@ -7,10 +7,12 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useSelector } from "react-redux";
+import { USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const email = useRef("");
@@ -39,51 +41,64 @@ const Login = () => {
     }
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
     const result = validateData(email.current.value, password.current.value);
   
     if (result == null) {
-      if (value === "Sign Up") {
-        createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            return updateProfile(user, {
-              displayName: name.current.value,
-              photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwme89cM8YZvHcybGrZl_Obd9U9p5QabozJQ&s",
-            });
-          })
-          .then(() => {
-            const user = auth.currentUser;
-            if (user) {
-              const { uid, email, displayName, photoURL } = user;
-              dispatch(addUser({ uid, email, displayName, photoURL }));
-              navigate("/browse");
-            }
-          })
-          .catch((error) => {
-            
-          });
-      } else {
-        signInWithEmailAndPassword(auth, email.current.value, password.current.value)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            const { uid, email, displayName, photoURL } = user;
-            dispatch(addUser({ uid, email, displayName, photoURL }));
-            navigate("/browse");
-          })
-          .catch((error) => {
+      try {
+        if (value === "Sign Up") {
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email.current.value,
+            password.current.value
+          );
           
+          const user = userCredential.user;
+          await updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: USER_AVATAR,
           });
+  
+          // After updating the profile, dispatch and navigate
+          dispatch(addUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          }));
+          navigate("/browse");
+        } else {
+          // Sign in logic
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            email.current.value,
+            password.current.value
+          );
+          const user = userCredential.user;
+  
+          // Dispatch user data
+          dispatch(addUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          }));
+          navigate("/browse");
+        }
+      } catch (error) {
+        setErrorMsg("Error signing up or signing in: " + error.message);
       }
+    } else {
+      setErrorMsg(result);
     }
-    setErrorMsg(result);
   };
+  
   
 
   return (
     <div className="relative h-screen">
-      <Header />
+      <Header videoComp = {false}/>
       <img
         className="absolute inset-0 w-full h-full object-cover z-0"
         src="https://assets.nflxext.com/ffe/siteui/vlv3/b2c3e95b-b7b5-4bb7-a883-f4bfc7472fb7/813635c2-ab2e-416f-aca0-2fe712618ed4/CA-en-20240805-POP_SIGNUP_TWO_WEEKS-perspective_WEB_9148549a-7358-4ba2-93c6-b061d704ac8e_large.jpg"
